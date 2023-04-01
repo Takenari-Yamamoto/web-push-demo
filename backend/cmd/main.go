@@ -12,6 +12,7 @@ func main() {
 	})
 
 	port := os.Getenv("PORT")
+	fmt.Println("ポートだよぉん", port)
 	if port == "" {
 		port = "8080"
 	}
