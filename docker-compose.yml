@@ -1,0 +1,14 @@
+version: '3'
+
+services:
+  backend:
+    build:
+      context: .
+      dockerfile: ./docker/go/Dockerfile
+    tty: true
+    working_dir: /app
+    volumes:
+      - ./backend:/app
+    command: ['go', 'run', 'cmd/main.go']
+    ports:
+      - '8080:8080'
