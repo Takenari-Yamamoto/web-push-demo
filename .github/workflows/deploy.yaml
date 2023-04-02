@@ -38,5 +38,5 @@ jobs:
           gcloud run deploy web-push-demo \
             --image gcr.io/${IMAGE_NAME}:${TAG} \
             --platform managed \
-            --region us-central1 \
+            --region asia-northeast1 \
             --allow-unauthenticated
