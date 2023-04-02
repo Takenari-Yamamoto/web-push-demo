@@ -5,6 +5,11 @@ on:
     branches:
       - main
 
+env:
+  GCP_PROJECT_ID: golang-project-377611
+  GCP_REGION: asia-northeast1
+  IMAGE_NAME: gcr.io/golang-project-377611/web-push-demo
+
 jobs:
   deploy:
     runs-on: ubuntu-latest
@@ -25,20 +30,16 @@ jobs:
         run: gcloud auth configure-docker
 
       - name: Build and push Docker image
-        env:
-          GCR_HOST: gcr.io
         run: |
-          IMAGE_NAME=golang-project-377611/web-push-demo
           TAG=$(echo $GITHUB_SHA | head -c7)
-          docker build -t ${GCR_HOST}/${IMAGE_NAME}:${TAG} .
-          docker push ${GCR_HOST}/${IMAGE_NAME}:${TAG}
+          docker build -t ${IMAGE_NAME}:${TAG} .
+          docker push ${IMAGE_NAME}:${TAG}
 
       - name: Deploy to Cloud Run
         run: |
-          IMAGE_NAME=golang-project-377611/web-push-demo
           TAG=$(echo $GITHUB_SHA | head -c7)
           gcloud run deploy web-push-demo \
-            --image gcr.io/${IMAGE_NAME}:${TAG} \
+            --image ${IMAGE_NAME}:${TAG} \
             --platform managed \
-            --region asia-northeast1 \
+            --region ${GCP_REGION} \
             --allow-unauthenticated
