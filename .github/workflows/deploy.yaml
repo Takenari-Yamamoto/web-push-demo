@@ -6,10 +6,10 @@ on:
       - main
 
 env:
-  PROJECT_ID: your-project-id
-  IMAGE_NAME: your-image-name
+  PROJECT_ID: golang-project-377611
+  IMAGE_NAME: web-push-demo
   REGION: asia-northeast1
-  SERVICE_NAME: your-service-name
+  SERVICE_NAME: web-push-demo
   MEMORY: 256Mi
   PORT: 8080
 
