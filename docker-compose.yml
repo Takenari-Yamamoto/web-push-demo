@@ -1,9 +1,9 @@
-version: "3"
+version: '3'
 
 services:
   backend:
     build:
       context: .
-      dockerfile: docker/go/Dockerfile
+      dockerfile: Dockerfile
     ports:
-      - "8080:8080"
+      - '8080:8080'
