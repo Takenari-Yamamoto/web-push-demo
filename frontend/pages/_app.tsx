@@ -1,6 +1,26 @@
-import '@/styles/globals.css'
-import type { AppProps } from 'next/app'
+// pages/_app.js
+import { AppProps } from 'next/app';
+import { useEffect } from 'react';
+import '../styles/globals.css';
 
-export default function App({ Component, pageProps }: AppProps) {
-  return <Component {...pageProps} />
+function MyApp({ Component, pageProps }: AppProps) {
+  useEffect(() => {
+    if ('serviceWorker' in navigator) {
+      const onsuccess = () => console.log('[Service Worker] Registered');
+      const onfailure = () => console.log('[Service Worker] Failed');
+
+      navigator.serviceWorker
+        .register('/sw.js')
+        .then(onsuccess)
+        .catch(onfailure);
+    }
+  }, []);
+
+  return (
+    <>
+      <Component {...pageProps} />
+    </>
+  );
 }
+
+export default MyApp;
